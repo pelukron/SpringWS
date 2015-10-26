@@ -24,4 +24,9 @@ public class ArticuloController {
     public List<Articulo> subfamilias(@RequestParam(value="name", defaultValue="") String name){
         return new ArticuloImpl().buscarSubFamilia(name);
     }
+
+    @RequestMapping(value = "/articulo", method = RequestMethod.GET)
+    public Articulo articulo(@RequestParam(value = "id", defaultValue = "") String id){
+        return new ArticuloImpl().buscarArticulo(id);
+    }
 }
