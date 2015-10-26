@@ -26,8 +26,14 @@ public class ArticuloImpl extends ConnectionDao implements ArticuloDao{
     private static final String INSERT = "INSERT INTO "+ TABLE_NAME_DB +"(name, tel, passwd) VALUES(?, ?, ?)";
     private static final String UPDATE = "UPDATE "+ TABLE_NAME_DB +" SET name=?, tel=?, passwd=? WHERE id=?";
 
+    //TODO: agregar filtro de las subfamilias
     @Override
     public List<Articulo> buscarSubFamilia() {
+        return null;
+    }
+
+    @Override
+    public List<Articulo> articulos() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         List<Articulo> list = new ArrayList<>();
@@ -37,10 +43,7 @@ public class ArticuloImpl extends ConnectionDao implements ArticuloDao{
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Articulo articulo = new Articulo();
-                articulo.setIdProducto(resultSet.getInt("idProducto"));
-                articulo.setNombre(resultSet.getString("sNombre"));
-                articulo.setDescripcion(resultSet.getString("desDescripcion"));
-                list.add(articulo);
+                list.add(result(articulo, resultSet));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -49,5 +52,17 @@ public class ArticuloImpl extends ConnectionDao implements ArticuloDao{
             close(preparedStatement);
         }
         return list;
+    }
+
+    private Articulo result(Articulo articulo, ResultSet resultSet) throws SQLException {
+        articulo.setId(resultSet.getInt("idProducto"));
+        articulo.setNombre(resultSet.getString("sNombre"));
+        articulo.setDescripcion(resultSet.getString("desDescripcion"));
+        articulo.setFamilia(resultSet.getString("idFamilia"));
+        articulo.setSubFamilia(resultSet.getString("idSubfamilia"));
+        articulo.setColor(resultSet.getInt("idColor"));
+        articulo.setMarca(resultSet.getInt("idMarca"));
+        articulo.setImagen(resultSet.getString("sImagen"));
+        return articulo;
     }
 }

@@ -4,20 +4,29 @@ package com.example.demo.model;
  * Created by Presentacion on 23/10/2015.
  */
 public class Articulo {
-    private int idProducto;
+    private int id;
     private String nombre;
     private String descripcion;
     private String familia;
     private String subFamilia;
     private int color;
     private int marca;
+    private String imagen;
 
-    public int getIdProducto() {
-        return idProducto;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

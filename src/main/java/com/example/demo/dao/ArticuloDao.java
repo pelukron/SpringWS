@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface ArticuloDao {
     List<Articulo> buscarSubFamilia();
+    List<Articulo> articulos();
 }
