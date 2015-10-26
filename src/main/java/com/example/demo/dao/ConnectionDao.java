@@ -11,9 +11,9 @@ import java.sql.Statement;
 public class ConnectionDao {
     private static final String JDBC_DRIVER_NAME = "com.mysql.jdbc.Driver";
     private static final String DB_NAME = "movil";
-    private static final String DB_URL = "jdbc:mysql://192.168.3.67:3306/"+ DB_NAME;
-    private static final String ID = "usrMovil";
-    private static final String PASS = "pswMovil";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/"+ DB_NAME;
+    private static final String ID = "usr";
+    private static final String PASS = "psw";
     protected Connection getConnection() {
         try {
             Class.forName(JDBC_DRIVER_NAME).newInstance();
