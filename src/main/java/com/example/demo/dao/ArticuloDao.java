@@ -8,6 +8,6 @@ import java.util.List;
  * Created by Presentacion on 23/10/2015.
  */
 public interface ArticuloDao {
-    List<Articulo> buscarSubFamilia();
+    List<Articulo> buscarSubFamilia(String name);
     List<Articulo> articulos();
 }

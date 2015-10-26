@@ -20,16 +20,35 @@ public class ArticuloImpl extends ConnectionDao implements ArticuloDao{
 
     //Query DB
     private static final String DELETE = "DELETE FROM "+ TABLE_NAME_DB +" WHERE id=?";
-    private static final String FIND_ALL = "SELECT * FROM "+ TABLE_NAME_DB;// +" ORDER BY id";
+    private static final String FIND_ALL = "SELECT * FROM "+ TABLE_NAME_DB +" ORDER BY idProducto";
     private static final String FIND_BY_ID = "SELECT * FROM "+ TABLE_NAME_DB +" WHERE id=?";
     private static final String FIND_BY_NAME = "SELECT * FROM "+ TABLE_NAME_DB +" WHERE name=?";
     private static final String INSERT = "INSERT INTO "+ TABLE_NAME_DB +"(name, tel, passwd) VALUES(?, ?, ?)";
     private static final String UPDATE = "UPDATE "+ TABLE_NAME_DB +" SET name=?, tel=?, passwd=? WHERE id=?";
 
-    //TODO: agregar filtro de las subfamilias
     @Override
-    public List<Articulo> buscarSubFamilia() {
-        return null;
+    public List<Articulo> buscarSubFamilia(String name) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        List<Articulo> list = new ArrayList<>();
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(FIND_ALL);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String subfamilia = resultSet.getString("idSubfamilia");
+                if (name.equals(subfamilia)) {
+                    Articulo articulo = new Articulo();
+                    list.add(result(articulo, resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close(connection);
+            close(preparedStatement);
+        }
+        return list;
     }
 
     @Override

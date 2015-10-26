@@ -4,6 +4,7 @@ import com.example.demo.dao.impl.ArticuloImpl;
 import com.example.demo.model.Articulo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,5 +18,10 @@ public class ArticuloController {
     @RequestMapping(value = "/articulos", method = RequestMethod.GET)
     public List<Articulo> articulos(){
         return new ArticuloImpl().articulos();
+    }
+
+    @RequestMapping(value = "/articulos/subfamilias", method = RequestMethod.GET)
+    public List<Articulo> subfamilias(@RequestParam(value="name", defaultValue="") String name){
+        return new ArticuloImpl().buscarSubFamilia(name);
     }
 }
